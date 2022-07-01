@@ -206,3 +206,64 @@ const attrs = useAttrs()
 
 1. 上例中，是因为使用了 `:myMode=“myMode”` ，所以实现了 `$attrs` 的响应式效果，`$attrs` 并不是响应式的。
 2. 利用单根节点的透传属性，可以实现多代的组件通信。
+
+### $refs API
+
+Vue 提供了 `$refs` API，用于访问后代组件实例。
+
+下面是一个简单的例子：
+
+```other
+// @/components/refsExample/ParentComponent.vue
+
+<script setup>
+import ChildComponent from './ChildComponent.vue'
+import {onMounted, ref} from "vue"
+
+const child = ref(null)
+const showState = ref(false)
+onMounted(() => {
+  showState.value = true
+})
+</script>
+
+<template>
+  <ChildComponent ref="child"/>
+  <template v-if="showState">
+    <span>My mode: {{ child.myMode }}</span>
+    <div>So I am {{ $refs.child.myMode }}.</div>
+    <button @click="child.changeMyMode('sleeping')">Sleeping</button>
+    <button @click="$refs.child.changeMyMode('working')">Working</button>
+  </template>
+</template>
+```
+
+```other
+// @/components/refsExample/ChildComponent.vue
+
+<script setup>
+import ChildComponent from './ChildComponent.vue'
+import {onMounted, ref} from "vue"
+
+const child = ref(null)
+const showState = ref(false)
+onMounted(() => {
+  showState.value = true
+})
+</script>
+
+<template>
+  <ChildComponent ref="child"/>
+  <template v-if="showState">
+    <span>My mode: {{ child.myMode }}</span>
+    <div>So I am {{ $refs.child.myMode }}.</div>
+    <button @click="child.changeMyMode('sleeping')">Sleeping</button>
+    <button @click="$refs.child.changeMyMode('working')">Working</button>
+  </template>
+</template>
+```
+
+注意事项：
+
+1. 使用 `<script setup>` 的组件没有 `this`，所以无法直接调用 `$refs`，通过创建与后代组件 ref 同名的 `ref(null)`，实现对后代组件实例的访问。
+2. 通过 `$refs` 访问后代组件的实例的时机需要在后代组件挂载到祖先组件上之后，也就是说，一般是在 `onMounted()` 中，对后代组件进行访问。

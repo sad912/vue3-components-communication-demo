@@ -15,6 +15,9 @@
     <li>
       <router-link to="/attrs">Attrs Example</router-link>
     </li>
+    <li>
+      <router-link to="/refs">Refs Example</router-link>
+    </li>
   </ul>
   <router-view></router-view>
 </template>

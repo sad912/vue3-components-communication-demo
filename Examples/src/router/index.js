@@ -3,6 +3,7 @@ import PropsExample from '@/pages/PropsExample.vue'
 import EmitsExample from '@/pages/EmitsExample.vue'
 import ParentExample from '@/pages/ParentExample.vue'
 import AttrsExample from '@/pages/AttrsExample.vue'
+import RefsExample from '@/pages/RefsExample.vue'
 const routes = [
     {
         path: '/props',
@@ -23,6 +24,11 @@ const routes = [
         path: '/attrs',
         name: 'attrsExample',
         component: AttrsExample
+    },
+    {
+        path: '/refs',
+        name: 'refsExample',
+        component: RefsExample
     }
 ]
 
