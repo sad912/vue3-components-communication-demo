@@ -1,5 +1,5 @@
 <script setup>
-import ParentComponent from "@/components/ParentExample/ParentComponent.vue"
+import ParentComponent from "@/components/parentExample/ParentComponent.vue"
 </script>
 
 <template>

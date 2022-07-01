@@ -112,9 +112,9 @@ const emit = defineEmits({
 3. Emits 的校验函数无论是使用 `$emit()` ，还是使用`defineProps()` 方式触发事件，都会执行校验函数。
 4. 可以配合 `v-model` 进行隐式传递事件。
 
-### $parent
+### $parent API
 
-Vue 提供了 `$parent` API，可以访问祖先组件实例。
+Vue 提供了 `$parent` API，用于访问祖先组件实例。
 
 下面是一个简单的例子：
 
@@ -161,3 +161,48 @@ const parent = currentInstance.$parent
 2. `$parent` 可以在后代组件的模版中直接使用。
 3. 使用 `<script setup>` 的组件没有 `this`，所以无法直接调用 `$parent`，可以使用 `getCurrentInstance` 方法来调用 `$parent`。
 
+### $attrs API
+
+Vue 提供了 `$attrs` API，用于访问祖先组件的透传属性。
+
+下面是一个简单的例子：
+
+```other
+// @/components/attrsExample/ParentComponent.vue
+
+<script setup>
+import ChildComponent from './ChildComponent.vue'
+import {ref} from "vue";
+
+const myMode = ref('learning')
+const changeMyMode = mode => {
+  myMode.value = mode
+}
+</script>
+
+<template>
+  <ChildComponent :myMode="myMode" :changeMyMode="changeMyMode"/>
+</template>
+```
+
+```other
+// @/components/attrsExample/ChildComponent.vue
+
+<script setup>
+import {useAttrs} from 'vue'
+
+const attrs = useAttrs()
+</script>
+
+<template>
+  <span>My mode: {{attrs.myMode}}</span>
+  <div>So I am {{$attrs.myMode}}.</div>
+  <button @click="attrs.changeMyMode('sleeping')">Sleeping</button>
+  <button @click="$attrs.changeMyMode('working')">Working</button>
+</template>
+```
+
+注意事项：
+
+1. 上例中，是因为使用了 `:myMode=“myMode”` ，所以实现了 `$attrs` 的响应式效果，`$attrs` 并不是响应式的。
+2. 利用单根节点的透传属性，可以实现多代的组件通信。
