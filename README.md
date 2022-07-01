@@ -2,6 +2,8 @@
 
 Vue 的一大特点就是组件化，而组件通信又是组件化最为重要的开发知识，本文对组件通信的方式和使用场景的分类做一个总结。
 
+> 需要注意的是，本文探讨的对象是使用 Composition API 和 `<script setup>` 的组件。
+
 ## 组件通信的方式
 
 ### Props 声明
@@ -109,3 +111,53 @@ const emit = defineEmits({
 2. 定义 Emits 名时使用 camelCase 方式命名，而在祖先对 Emits 监听时，使用 kebab-case 方式命名。
 3. Emits 的校验函数无论是使用 `$emit()` ，还是使用`defineProps()` 方式触发事件，都会执行校验函数。
 4. 可以配合 `v-model` 进行隐式传递事件。
+
+### $parent
+
+Vue 提供了 `$parent` API，可以访问祖先组件实例。
+
+下面是一个简单的例子：
+
+```other
+// @components/ParentExample/ParentComponent.vue
+
+<script setup>
+import ChildComponent from './ChildComponent.vue'
+import {ref} from "vue";
+
+const myMode = ref('learning')
+const changeMyMode = mode => {
+  myMode.value = mode
+}
+defineExpose({myMode, changeMyMode})
+</script>
+
+<template>
+  <ChildComponent/>
+</template>
+```
+
+```other
+// @components/ParentExample/ChildComponent.vue
+
+<script setup>
+import {getCurrentInstance} from 'vue'
+
+const currentInstance = getCurrentInstance().proxy
+const parent = currentInstance.$parent
+</script>
+
+<template>
+  <span>My mode: {{ $parent.myMode }}</span>
+  <div>So, I am {{ parent.myMode }}.</div>
+  <button @click="$parent.changeMyMode('working')">Working</button>
+  <button @click="parent.changeMyMode('sleeping')">Sleeping</button>
+</template>
+```
+
+注意事项：
+
+1. 使用 `<script setup>` 的组件需要使用 `defineExpose()` API 暴露属性，这样才可以配合 `$parent` 实现组件通信。
+2. `$parent` 可以在后代组件的模版中直接使用。
+3. 使用 `<script setup>` 的组件没有 `this`，所以无法直接调用 `$parent`，可以使用 `getCurrentInstance` 方法来调用 `$parent`。
+
