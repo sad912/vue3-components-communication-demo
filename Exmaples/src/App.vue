@@ -1,9 +1,10 @@
 <script setup>
-import ParentComponent from './components/ParentComponent.vue'
 </script>
 
 <template>
-  <ParentComponent/>
+  <router-link to="/props">Props Example</router-link>
+  <router-link to="/emits">Emits Example</router-link>
+  <router-view></router-view>
 </template>
 
 
