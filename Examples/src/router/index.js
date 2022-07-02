@@ -4,6 +4,7 @@ import EmitsExample from '@/pages/EmitsExample.vue'
 import ParentExample from '@/pages/ParentExample.vue'
 import AttrsExample from '@/pages/AttrsExample.vue'
 import RefsExample from '@/pages/RefsExample.vue'
+import RootExample from '@/pages/RootExample.vue'
 const routes = [
     {
         path: '/props',
@@ -29,6 +30,11 @@ const routes = [
         path: '/refs',
         name: 'refsExample',
         component: RefsExample
+    },
+    {
+        path: '/root',
+        name: 'rootExample',
+        component: RootExample
     }
 ]
 

@@ -1,4 +1,11 @@
 <script setup>
+import {ref} from "vue";
+
+const myMode = ref('learning')
+const changeMyMode = mode => {
+  myMode.value = mode
+}
+defineExpose({myMode, changeMyMode})
 </script>
 
 <template>
@@ -17,6 +24,9 @@
     </li>
     <li>
       <router-link to="/refs">Refs Example</router-link>
+    </li>
+    <li>
+      <router-link to="/root">Root Example</router-link>
     </li>
   </ul>
   <router-view></router-view>
