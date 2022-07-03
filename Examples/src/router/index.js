@@ -5,7 +5,8 @@ import ParentExample from '@/pages/ParentExample.vue'
 import AttrsExample from '@/pages/AttrsExample.vue'
 import RefsExample from '@/pages/RefsExample.vue'
 import RootExample from '@/pages/RootExample.vue'
-import ProvideAndInjectExample from '@/pages/ProvideAndInject.vue'
+import ProvideAndInjectExample from '@/pages/ProvideAndInjectExample.vue'
+import PiniaExample from '@/pages/PiniaExample.vue'
 
 const routes = [
     {
@@ -42,6 +43,11 @@ const routes = [
         path: '/provide&inject',
         name: 'provideAndInjectExample',
         component: ProvideAndInjectExample
+    },
+    {
+        path: '/pinia',
+        name: 'piniaExample',
+        component: PiniaExample
     }
 ]
 
