@@ -108,7 +108,7 @@ const emit = defineEmits({
 注意事项：
 
 1. 最好使用详细的定义 Emits 的结构，同时尽可能的进行校验，便于维护和开发。
-2. 定义 Emits 名时使用 camelCase 方式命名，而在祖先对 Emits 监听时，使用 kebab-case 方式命名。
+2. 定义 Emits 名时使用 camelCase 方式命名，而在祖先组件对 Emits 监听时，使用 kebab-case 方式命名。
 3. Emits 的校验函数无论是使用 `$emit()` ，还是使用`defineProps()` 方式触发事件，都会执行校验函数。
 4. 可以配合 `v-model` 进行隐式传递事件。
 
@@ -407,3 +407,30 @@ const resetState = () => {
 具体用法可以看 Pinia 文档。
 
 我在读文档的时候写了这么一篇博客「[Pinia 入门](https://github.com/sad912/sad-blogs/blob/main/Pinia%20入门｜看文档写%20Demo.md)」。
+
+## 使用场景的分类
+
+### 后代组件与祖先组件通信
+
+1. Props 声明
+2. Emit 事件
+3. $attrs API
+4. $parent API
+5. $root API
+6. $ref API
+7. provide/inject API
+8. Pinia
+
+### 同代组件通信
+
+1. $parent API
+2. provide/inject API
+3. Pinia
+
+## 跨层级组件通信
+
+1. provide/inject API
+2. $root API
+3. Pinia
+
+以上。
