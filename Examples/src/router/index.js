@@ -5,6 +5,8 @@ import ParentExample from '@/pages/ParentExample.vue'
 import AttrsExample from '@/pages/AttrsExample.vue'
 import RefsExample from '@/pages/RefsExample.vue'
 import RootExample from '@/pages/RootExample.vue'
+import ProvideAndInjectExample from '@/pages/ProvideAndInject.vue'
+
 const routes = [
     {
         path: '/props',
@@ -35,6 +37,11 @@ const routes = [
         path: '/root',
         name: 'rootExample',
         component: RootExample
+    },
+    {
+        path: '/provide&inject',
+        name: 'provideAndInjectExample',
+        component: ProvideAndInjectExample
     }
 ]
 

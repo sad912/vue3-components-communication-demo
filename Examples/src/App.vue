@@ -28,6 +28,9 @@ defineExpose({myMode, changeMyMode})
     <li>
       <router-link to="/root">Root Example</router-link>
     </li>
+    <li>
+      <router-link to="/provide&inject">Provide/Inject Example</router-link>
+    </li>
   </ul>
   <router-view></router-view>
 </template>
